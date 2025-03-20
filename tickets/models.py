@@ -6,7 +6,13 @@ class Movie(models.Model):
     movie_date = models.DateField(max_length=10)
     category = models.CharField(max_length=10)
 
-class guest():
+class Guest(models.Model):
     guest_name = models.CharField(max_length=100)
+    phone_number = models.CharField(max_length=11)
+
+class Reservation(models.Model):
+    guest = models.ForeignKey(Guest, related_name='reservation', on_delete= models.CASCADE)
+    movie = models.ForeignKey(Movie, related_name='reservation', on_delete= models.CASCADE)
+    
     
 # Create your models here.
