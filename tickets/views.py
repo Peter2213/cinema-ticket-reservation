@@ -5,15 +5,7 @@ from django.http.response import JsonResponse
 from .models import Guest, Reservation, Movie
 from rest_framework.decorators import api_view
 from .serializers import GuestSerializer, MovieSerializer, ReservationSerializer
-
 # Create your views here.
-# Imaginating without rest_framework 
-def no_rest(request):
-    data = Guest.objects.all()
-    res_dict = {
-        'Guest' : list(data.values('guest_name', 'phone_number'))
-    }
-    return JsonResponse(res_dict)
 
 # GET, POST
 @api_view(['GET', 'POST'])
