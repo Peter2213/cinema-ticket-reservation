@@ -4,5 +4,6 @@ from tickets import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('rest/fbvlist/', views.FBV_List),
-    path('rest/fbvpk/<int:pk>', views.FBV_pk)
+    path('rest/fbvpk/<int:pk>', views.FBV_pk),
+    path('rest/cbvlist', views.CBV_List.as_view())
 ]
