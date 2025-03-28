@@ -34,7 +34,7 @@ def FBV_pk(request, pk):
         serializer = GuestSerializer(guest)
         return Response(serializer.data)
     elif request.method == 'PUT':
-        serializer = GuestSerializer(data = request.data)
+        serializer = GuestSerializer(guest, data = request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status= status.HTTP_202_ACCEPTED)
