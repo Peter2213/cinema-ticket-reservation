@@ -22,11 +22,16 @@ def FBV_List(request):
         return Response(serializer.data, status= status.HTTP_400_BAD_REQUEST)  
 
 # GET, PUT, DELETE 
+# getting the guest by his pk
 @api_view(['GET', 'PUT', 'DELETE'])
 def FBV_pk(request, pk):
-    guest = Guest.objects.get(pk=pk)
+    #handling try catch to check the user exists or not
+    try:
+        guest = Guest.objects.get(pk=pk)
+    except guest.DoesNotExists:
+        return Response(status= status.HTTP_404_NOT_FOUND)
     if request.method == 'GET':
-        serializer = GuestSerializer(guest, many = True)
+        serializer = GuestSerializer(guest)
         return Response(serializer.data)
     elif request.method == 'PUT':
         serializer = GuestSerializer(data = request.data)
