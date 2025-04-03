@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import Http404
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -29,7 +30,7 @@ def FBV_pk(request, pk):
     #handling try catch to check the user exists or not
     try:
         guest = Guest.objects.get(pk=pk)
-    except guest.DoesNotExists:
+    except Guest.DoesNotExists:
         return Response(status= status.HTTP_404_NOT_FOUND)
     if request.method == 'GET':
         serializer = GuestSerializer(guest)
@@ -45,7 +46,6 @@ def FBV_pk(request, pk):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 # class based views
-
 class CBV_List(APIView):
     def get(self, request):
         guest = Guest.objects.all()
@@ -57,6 +57,30 @@ class CBV_List(APIView):
             serializer.save()
             return Response(serializer.data, status = status.HTTP_201_CREATED)
         return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
+
+# class based views pk
+
+class CBV_pk(APIView):
+    def getObj(self, pk):
+        try:
+            return Guest.objects.get(pk = pk)
+        except Guest.DoesNotExist:
+            raise Http404
+    def get(self, request, pk):
+        guest = self.getObj(pk)
+        serializer = GuestSerializer(guest)
+        return Response(serializer.data)
+    def put(self, request, pk):
+        guest = self.getObj(pk)
+        serializer = GuestSerializer(guest, data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status= status.HTTP_202_ACCEPTED)
+        return Response(status=status.HTTP_400_BAD_REQUEST) 
+    def delete(self, request, pk):
+        guest = self.getObj(pk)
+        guest.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)    
         
         
     
