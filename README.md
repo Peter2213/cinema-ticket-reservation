@@ -41,7 +41,7 @@ This project is a backend system for a cinema ticket reservation application bui
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Peter2213/cinema-ticket-reservation
    cd cinema-ticket-reservation
    ```
 
