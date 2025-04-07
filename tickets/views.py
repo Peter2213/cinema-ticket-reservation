@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.http import Http404
-from rest_framework import viewsets
-from rest_framework import status, generics, mixins
+from rest_framework import status, generics, mixins, viewsets, filters
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.http.response import JsonResponse
@@ -124,3 +123,11 @@ class Generic_pk(generics.RetrieveUpdateDestroyAPIView):
 class GuestViewSet(viewsets.ModelViewSet):
     queryset = Guest.objects.all()
     serializer_class = GuestSerializer
+class MovieViewSet(viewsets.ModelViewSet):
+    queryset = Movie.objects.all()
+    serializer_class = MovieSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['movie_name', 'category']
+class ReservationViewSet(viewsets.ModelViewSet):
+    queryset = Reservation.objects.all()
+    serializer_class = ReservationSerializer

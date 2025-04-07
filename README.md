@@ -4,38 +4,16 @@ This project is a backend system for a cinema ticket reservation application bui
 
 ## Features
 
-### 1. Function-Based Views (FBV)
+-**GuestViewSet**: Provides a complete set of CRUD operations for guests using DRF ViewSets.
 
-- **FBV_List**: Handles `GET` and `POST` requests to list all guests or create a new guest.
-  - URL: `/rest/fbvlist/`
-- **FBV_pk**: Handles `GET`, `PUT`, and `DELETE` requests for a specific guest by primary key.
-  - URL: `/rest/fbvpk/<int:pk>/`
+-**MovieViewSet**: Provides CRUD operations for movies with a **searching feature**.
 
-### 2. Class-Based Views (CBV)
+- You can search for movies by `movie_name` or `category` using query parameters.
+- Example: `/rest/viewset/movie/?search=<search_term>`
 
-- **CBV_List**: Handles `GET` and `POST` requests to list all guests or create a new guest.
-  - URL: `/rest/cbvlist/`
-- **CBV_pk**: Handles `GET`, `PUT`, and `DELETE` requests for a specific guest by primary key.
-  - URL: `/rest/cbvpk/<int:pk>/`
+-**ReservationViewSet**: Provides CRUD operations for reservations.
 
-### 3. Mixins-Based Views
-
-- **Mixins_List**: Handles `GET` and `POST` requests using DRF mixins.
-  - URL: `/rest/mixinslist/`
-- **Mixins_pk**: Handles `GET`, `PUT`, and `DELETE` requests for a specific guest using DRF mixins.
-  - URL: `/rest/mixinspk/<int:pk>/`
-
-### 4. Generic Views
-
-- **Generic_List**: Handles `GET` and `POST` requests using DRF generic views.
-  - URL: `/rest/GenericList/`
-- **Generic_pk**: Handles `GET`, `PUT`, and `DELETE` requests for a specific guest using DRF generic views.
-  - URL: `/rest/Genericpk/<int:pk>/`
-
-### 5. ViewSets and Routers
-
-- **GuestViewSet**: Provides a complete set of CRUD operations for guests using DRF ViewSets.
-  - URL: `/rest/viewset/`
+These ViewSets are registered with a `DefaultRouter`, which automatically generates the necessary routes.
 
 ## Installation
 
@@ -44,7 +22,6 @@ This project is a backend system for a cinema ticket reservation application bui
    git clone https://github.com/Peter2213/cinema-ticket-reservation
    cd cinema-ticket-reservation
    ```
-
 
 2-Install dependencies:
 
@@ -57,7 +34,6 @@ pip install -r requirements.txt
 ```python
 python manage.py migrate
 ```
-
 
 4.Start the development server:
 
