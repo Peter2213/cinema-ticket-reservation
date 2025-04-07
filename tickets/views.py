@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import Http404
+from rest_framework import viewsets
 from rest_framework import status, generics, mixins
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -116,3 +117,10 @@ class Generic_List(generics.ListCreateAPIView):
 class Generic_pk(generics.RetrieveUpdateDestroyAPIView):
     queryset = Guest.objects.all()
     serializer_class = GuestSerializer  
+    
+    
+# trying view sets 
+
+class GuestViewSet(viewsets.ModelViewSet):
+    queryset = Guest.objects.all()
+    serializer_class = GuestSerializer
