@@ -4,8 +4,8 @@ from tickets import views
 from rest_framework.routers import DefaultRouter
 router = DefaultRouter()
 router.register('guest', views.GuestViewSet, basename='guest')
-router.register('movie', views.MovieViewSet, basename='guest')
-router.register('reservation', views.ReservationViewSet, basename='guest')
+router.register('movie', views.MovieViewSet, basename='movie')
+router.register('reservation', views.ReservationViewSet, basename='reservation')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('rest/fbvlist/', views.FBV_List),
@@ -17,4 +17,6 @@ urlpatterns = [
     path('rest/GenericList', views.Generic_List.as_view()),
     path('rest/Genericpk/<int:pk>', views.Generic_pk.as_view()),
     path('rest/viewset/', include(router.urls)),
+    path('findmovie/', views.find_movie),
+    path('newreservation/', views.new_reservation),
 ]
