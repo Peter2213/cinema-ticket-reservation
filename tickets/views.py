@@ -131,3 +131,27 @@ class MovieViewSet(viewsets.ModelViewSet):
 class ReservationViewSet(viewsets.ModelViewSet):
     queryset = Reservation.objects.all()
     serializer_class = ReservationSerializer
+
+# find movie by using fbv
+@api_view(['GET'])
+def find_movie(request):
+    movie = Movie.objects.filter(movie_name = request.data['movie_name'], hall = request.data['hall'])
+    serializer = MovieSerializer(movie, many = True)
+    return Response(serializer.data)
+# create reservation by using fbv
+@api_view(['POST'])
+def new_reservation(request):
+    movie = Movie.objects.get(hall = request.data['hall'], movie_name = request.data['movie_name'])
+    # creating guest object
+    ############################################################################
+    guest = Guest()
+    guest.guest_name = request.data['guest_name']
+    guest.phone_number = request.data['phone_number']
+    guest.save()   
+    ############################################################################
+    # creating reservation object
+    reservation = Reservation()
+    reservation.movie = movie
+    reservation.guest = guest
+    reservation.save()
+    return Response(status= status.HTTP_201_CREATED)

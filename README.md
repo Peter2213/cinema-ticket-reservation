@@ -15,6 +15,17 @@ This project is a backend system for a cinema ticket reservation application bui
 
 These ViewSets are registered with a `DefaultRouter`, which automatically generates the necessary routes.
 
+
+### Additional Endpoints
+
+-**Find Movie**: A custom endpoint to find a movie using Function-Based Views.
+
+- URL: `/findmovie/`
+
+-**New Reservation**: A custom endpoint to create a new reservation using Function-Based Views.
+
+- URL: `/newreservation/`
+
 ## Installation
 
 1. Clone the repository:
